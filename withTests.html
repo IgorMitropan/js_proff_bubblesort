@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Testing of the Visualisation of the Bubble sort</title>
+    <link href="style.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+    <script>
+        mocha.setup('bdd');
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+    <script>
+        var assert = chai.assert;
+        var expect = chai.expect;
+    </script>
+
+</head>
+
+<body>
+
+<h2>This is a visualisation of the Bubble sort</h2>
+<div class="btnGroup">
+    <button id="refresh" class="controlBtn">Refresh</button>
+    <button id="go" class="controlBtn">Start</button>
+</div>
+<div>
+    <fieldset id="container">
+        <legend>Input the elements of the array:</legend>
+        <input type="number" value="1">
+        <input type="number" value="9">
+        <input type="number" value="7">
+        <input type="number" value="6">
+        <input type="number" value="5">
+        <input type="number" value="8">
+        <input type="number" value="4">
+        <input type="number" value="0">
+        <input type="number" value="2">
+        <input type="number" value="3">
+    </fieldset>
+</div>
+<div class="btnGroup">
+    <button id="addBtn" class="manageElementsBtn left">Add element</button><button id="removeBtn" class="manageElementsBtn right">Remove element</button>
+</div>
+<fieldset class="small">
+    <legend>Used styles</legend>
+    <div>
+        <input type="number" value="4" class="changed small" disabled><label>- Elements are changing on current step</label>
+    </div>
+    <div>
+        <input type="number" value="0" class="changedBefore small" disabled><label>- Elements were changed on previous step</label>
+    </div>
+</fieldset>
+<script src="./js/throttle.js"></script>
+<script src="./js/Array.js"></script>
+<script src="./js/Notification.js"></script>
+<script src="./js/Main.js"></script>
+
+<script src="./js/test.js"></script>
+
+<fieldset>
+    <legend>Test results</legend>
+    <div id="mocha"></div>
+</fieldset>
+
+<script>
+    mocha.run();
+</script>
+</body>
+</html>
