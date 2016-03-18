@@ -1,10 +1,12 @@
 'use strict';
-class Array {
+class BubbleSortDemo {
     constructor(options) {
         this._el = options.element;
-        this._state = Array.notInitialize;
+        this._state = BubbleSortDemo.notInitialize;
+
         this._i = 1;
         this._j = 1;
+
         if(options.test) { //special mode without delay for testing
             this._delay = 0;
         } else {
@@ -33,12 +35,15 @@ class Array {
         if (this.state) {
             return null;
         }
+
         let space = document.createTextNode('\n');
         let newElement = document.createElement('input');
         newElement.type = 'number';
         newElement.value = '0';
+
         this._el.appendChild(space);
         this._el.appendChild(newElement);
+
         return newElement;
     }
 
@@ -46,11 +51,12 @@ class Array {
         if (this.state) {
             return null;
         }
+
         if (this._el.children.length > 2) {
             this._el.removeChild(container.lastChild);
             this._el.removeChild(container.lastChild); // we delete last element of the array and the white space
         } else {
-            throw new Error("You can't delete all elements of the array!");
+            throw new Error('You can\'t delete all elements of the array!');
         }
     }
 
@@ -61,12 +67,13 @@ class Array {
 
         for (let i = 1; i < this._el.children.length; i++) { // we start with second child, because first child is a legend
             if (isNaN(parseFloat(container.children[i].value))) {
-                throw new Error("Element N" + i + " is not a number!");
+                throw new Error('Element N' + i + ' is not a number!');
             }
         }
 
-        this._state = Array.readyForSort;
-        this._el.children[0].innerHTML = 'Array:';
+        this._state = BubbleSortDemo.readyForSort;
+        this._el.children[0].innerHTML = 'BubbleSort Demo:';
+
         for (let i = 1; i < this._el.children.length; i++) {
             this._el.children[i].disabled = true;
         }
@@ -77,11 +84,12 @@ class Array {
             return null;
         }
         if (this.state === 2) {
-            throw new Error("The array has already been sorted!");
+            throw new Error('The array has already been sorted!');
         }
 
         let i = this._i;
         let j = this._j;
+
         for (; i < this._el.children.length - 1; i++) {
             for (; j < this._el.children.length - i; j++) {
                 let firstVal = parseFloat(this._el.children[j].value);
@@ -89,15 +97,17 @@ class Array {
 
                 if (firstVal > secondVal) {
                     this._change(this._el.children[j], this._el.children[j + 1]);
+
                     this._i = i;
                     this._j = j + 1;
+
                     return;
                 }
             }
             j = 1;
         }
 
-        this._state = Array.sorted;
+        this._state = BubbleSortDemo.sorted;
         this._removeClass('changed','changedBefore');
     }
 
@@ -111,17 +121,20 @@ class Array {
         this._removeClass('changedBefore');
 
         let changedPrevStep = this._el.querySelectorAll('.changed');
-            if (changedPrevStep) {
-                for(let i = 0; i < changedPrevStep.length ; i++) {
-                    changedPrevStep[i].classList.add('changedBefore');
-                }
+
+        if (changedPrevStep) {
+            for(let i = 0; i < changedPrevStep.length ; i++) {
+                changedPrevStep[i].classList.add('changedBefore');
             }
+        }
+
         this._removeClass('changed');
 
         first.classList.add('changed');
         second.classList.add('changed');
 
         let empty = first.value;
+
         if (this._delay) {
             setTimeout(function () {
                 first.value = second.value;

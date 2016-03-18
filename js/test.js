@@ -1,6 +1,7 @@
 'use strict';
 let container = document.getElementById('container');
-let testingArray = new Array({
+
+let testingBubbleSorter = new BubbleSortDemo({
     element: document.getElementById('container'),
     test: 1
 });
@@ -8,8 +9,9 @@ let testingArray = new Array({
 describe('Add element', function () {
     let numOfChildren = container.children.length;
     let newElement;
+
     beforeEach(function() {
-        newElement = testingArray.addElement();
+        newElement = testingBubbleSorter.addElement();
     });
 
     it('Adding one new element', function() {
@@ -25,17 +27,19 @@ describe('Add element', function () {
     });
 
     afterEach(function() {
-        testingArray.removeElement();
+        testingBubbleSorter.removeElement();
     });
 });
 
 describe('Remove element', function () {
     let numOfChildren;
     let newElement;
+
     beforeEach(function() {
-        newElement = testingArray.addElement();
+        newElement = testingBubbleSorter.addElement();
         numOfChildren = container.children.length;
-        testingArray.removeElement();
+
+        testingBubbleSorter.removeElement();
     });
 
     it('Removing one element', function() {
@@ -48,43 +52,51 @@ describe('Remove element', function () {
 
     it('Not removing the last element', function() {
         while (container.children.length>2) {
-            testingArray.removeElement();
+            testingBubbleSorter.removeElement();
         }
+
         try {
-            testingArray.removeElement();
+            testingBubbleSorter.removeElement();
         } catch(err) {}
+
         expect(container.children.length).to.equal(2);
     });
 
     after( function() {
-        testingArray.addElement().value = '9';
-        testingArray.addElement().value = '7';
-        testingArray.addElement().value = '6';
-        testingArray.addElement().value = '5';
-        testingArray.addElement().value = '8';
-        testingArray.addElement().value = '4';
-        testingArray.addElement().value = '0';
-        testingArray.addElement().value = '2';
-        testingArray.addElement().value = '3';
+        testingBubbleSorter.addElement().value = '9';
+        testingBubbleSorter.addElement().value = '7';
+        testingBubbleSorter.addElement().value = '6';
+        testingBubbleSorter.addElement().value = '5';
+        testingBubbleSorter.addElement().value = '8';
+        testingBubbleSorter.addElement().value = '4';
+        testingBubbleSorter.addElement().value = '0';
+        testingBubbleSorter.addElement().value = '2';
+        testingBubbleSorter.addElement().value = '3';
     })
 
 });
 
-describe('Initialisation of the Array', function () {
+describe('Initialisation of the BubbleSortDemo', function () {
     let newElement;
-    it("If user inputs value, which isn't a number, tha array isn't initialising", function() {
-        newElement = testingArray.addElement();
+
+    it('If user inputs value, which isn\'t a number, tha array isn\'t initialising', function() {
+        newElement = testingBubbleSorter.addElement();
         newElement.value = '-';
+
         try {
-            testingArray.init();
+            testingBubbleSorter.init();
         } catch(err) {}
-        expect(testingArray.state).to.equal(Array.notInitialize);
-        testingArray.removeElement();
+
+        expect(testingBubbleSorter.state).to.equal(BubbleSortDemo.notInitialize);
+
+        testingBubbleSorter.removeElement();
     });
-    it("Not initialising second time", function() {
-        testingArray._state = Array.readyForSort;
-        expect(testingArray.init()).to.equal(null);
-        testingArray._state = Array.notInitialize;
+    it('Not initialising second time', function() {
+        testingBubbleSorter._state = BubbleSortDemo.readyForSort;
+
+        expect(testingBubbleSorter.init()).to.equal(null);
+
+        testingBubbleSorter._state = BubbleSortDemo.notInitialize;
     });
 });
 
@@ -93,76 +105,83 @@ describe('Step of sorting', function () {
     let isSorted;
     
     before( function() {
-            testingArray.init();
+            testingBubbleSorter.init();
         }
     );
 
     beforeEach( function() {
-        testingArray.step();
+        testingBubbleSorter.step();
         count = 0;
     });
 
-    it("Two elements have style 'changed' on first step", function() {
+    it('Two elements have style \'changed\' on first step', function() {
         for (let i = 1; i < container.children.length; i++) {
             if ( container.children[i].classList.contains('changed') ) {
                 count++;
-            };
+            }
         }
+
         expect(count).to.equal(2);
     });
 
-    it("Two elements have style 'changedBefore' on every step", function() {
+    it('Two elements have style \'changedBefore\' on every step', function() {
         for (let i = 1; i < container.children.length; i++) {
             if ( container.children[i].classList.contains('changedBefore' ) ) {
                 count++;
-            };
+            }
         }
+
         expect(count).to.equal(2);
     });
 
-    it("Two elements have style 'changed' on every step", function() {
+    it('Two elements have style \'changed\' on every step', function() {
         for (let i = 1; i < container.children.length; i++) {
             if ( container.children[i].classList.contains('changed') ) {
                 count++;
-            };
+            }
         }
+
         expect(count).to.equal(2);
     });
 
-    it("Finally the array will be sorted", function() {
+    it('Finally the array will be sorted', function() {
 
-        while(testingArray.state !== Array.sorted) {
-            testingArray.step();
+        while(testingBubbleSorter.state !== BubbleSortDemo.sorted) {
+            testingBubbleSorter.step();
         }
+
         isSorted = true;
         for (let i = 1; i < container.children.length-1; i++) {
             if ( parseFloat(container.children[i].value) > parseFloat(container.children[i+1].value) ) {
                 isSorted = false;
                 break;
-            };
+            }
         }
+
         expect(isSorted).to.equal(true);
     });
     
     after( function() {
         container.children[0].innerHTML = 'Input the elements of the array:';
+
         while (container.children.length>1) {
             container.removeChild(container.lastChild);
         }
-        testingArray._state = Array.notInitialize;
 
-        testingArray.addElement().value = '1';
-        testingArray.addElement().value = '9';
-        testingArray.addElement().value = '7';
-        testingArray.addElement().value = '6';
-        testingArray.addElement().value = '5';
-        testingArray.addElement().value = '8';
-        testingArray.addElement().value = '4';
-        testingArray.addElement().value = '0';
-        testingArray.addElement().value = '2';
-        testingArray.addElement().value = '3';
+        testingBubbleSorter._state = BubbleSortDemo.notInitialize;
 
-        testingArray = null;
+        testingBubbleSorter.addElement().value = '1';
+        testingBubbleSorter.addElement().value = '9';
+        testingBubbleSorter.addElement().value = '7';
+        testingBubbleSorter.addElement().value = '6';
+        testingBubbleSorter.addElement().value = '5';
+        testingBubbleSorter.addElement().value = '8';
+        testingBubbleSorter.addElement().value = '4';
+        testingBubbleSorter.addElement().value = '0';
+        testingBubbleSorter.addElement().value = '2';
+        testingBubbleSorter.addElement().value = '3';
+
+        testingBubbleSorter = null;
     });
     
 });

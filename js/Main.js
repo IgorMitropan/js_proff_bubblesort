@@ -1,5 +1,5 @@
 'use strict';
-let myArray = new Array({
+let BubbleSorter = new BubbleSortDemo({
     element: document.getElementById('container')
 });
 
@@ -18,12 +18,12 @@ let go = document.getElementById('go');
 go.addEventListener('click', run);
 
 function addElement() {
-    myArray.addElement();
+    BubbleSorter.addElement();
 }
 
 function removeElement() {
         try {
-            myArray.removeElement()
+            BubbleSorter.removeElement()
         } catch(err) {
             errNotification = new Notification({
                 text: err.message
@@ -36,10 +36,10 @@ function refreshPage() {
 }
 
 function run() {
-    if (!myArray.state) {
+    if (!BubbleSorter.state) {
         try {
-            myArray.init();
-            go.innerHTML = "Next step";
+            BubbleSorter.init();
+            go.innerHTML = 'Next step';
             addBtn.style.display = 'none';
             removeBtn.style.display = 'none';
         } catch(err) {
@@ -48,8 +48,9 @@ function run() {
             });
         }
     }
+
     try {
-       myArray.step();
+       BubbleSorter.step();
     } catch(err) {
         errNotification = new Notification({
             text: err.message
