@@ -1,0 +1,78 @@
+fieldset {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    border: 1px solid grey;
+    display: inline-block;
+    vertical-align: middle;
+}
+legend {
+    color: grey;
+}
+input {
+    width: 60px;
+    height: 50px;
+    margin: 4px;
+    border-radius: 8px;
+    border: 1px solid dodgerblue;
+    text-align: center;
+    font-size: large;
+}
+
+.controlBtn {
+    width: 100px;
+    height: 50px;
+    margin: 4px;
+    border-radius: 8px;
+    background-color: #337ab7;
+    border-color: rgb(36, 85, 128);
+    font-size: large;
+    color: white;
+}
+.manageElementsBtn {
+    width: 65px;
+    height: 50px;
+    margin: 0px;
+}
+.manageElementsBtn.left {
+    border-radius: 8px 0px 0px 8px;
+}
+.manageElementsBtn.right {
+    border-radius: 0px 8px 8px 0px;
+}
+.btnGroup {
+    margin: 5px;
+    padding: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.notification {
+    height: 35px;
+    position: fixed;
+    z-index: 1000;
+    padding: 14px 10px 5px 12px;
+    border-radius: 8px;
+    border: 1px solid ;
+    color: white;
+    font: normal 18px Georgia;
+    background: lightpink;
+    text-align: center;
+    vertical-align: middle;
+}
+.changed {
+    background-color: lightskyblue;
+    color: white;
+}
+.changedBefore {
+    color: purple;
+    border-color: purple;
+}
+input.small {
+    width: 30px;
+    height: 25px;
+}
+fieldset.small {
+    width: 320px;
+    display: block;
+    margin-bottom: 50px;
+}
